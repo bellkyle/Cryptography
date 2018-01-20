@@ -60,7 +60,7 @@ public class Congruent {
 		
 		Mis = calculateMis(length, M, mods);
 		
-		yis = calculateYis(length);
+		yis = calculateYis(length, Mis, mods);
 
 		sum = calculateSum(length, numbers, Mis, yis);
 		
@@ -94,33 +94,25 @@ public class Congruent {
 	
 	//Calculating yi where Miyi = 1 (mod ni)  (congruent)
 	//Not complete waiting for Extended Euclidean Algorithm to be completed
-	public static int[] calculateYis(int length)
+	public static int[] calculateYis(int length, int[] Mis, int[] mods)
 	{
 		int[] yis = new int[length];
-		return yis;
+		int temp = 0;
 		
-		//Calculating yi where Miyi = 1 (mod ni)  (congruent)
-				/*
-				for(int i = 0; i < length; i++)
+		//I believe this will be used after the gcd is calculated
+		for(int i = 0; i < length; i++)
+		{
+			for(int j = 0; j < mods[i]; j++)
+			{
+				if((Mis[i] * j) % mods[i] == 1)
 				{
-					/*
-					 y = Mis[i] % mods[i];
-					
-					if((y*y) % mods[i] == 1)
-						yis[i] = y;
-					//This is not calculating the inverse for all values
-					else
-						yis[i] = (mods[i] + 1) / y;
-					
-					y = Mis[i] % mods[i];
-					
-					if(Mis[i] > mods[i])
-						yis[i] = (mods[i] + 1) / y;
-					else
-						yis[i] = ((numbers[i] * mods[i]) + 1) / Mis[i];
-					System.out.println(yis[i]);
+					temp = j;
+					j = mods[i];
 				}
-				*/
+			}
+			yis[i] = temp;
+		}
+		return yis;
 	}
 	
 	//Calculating the sum of aiMiyi for 0 <= i <= k
