@@ -3,7 +3,6 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class Gcd {
-
     /**
      * @param args the command line arguments
      */
@@ -13,10 +12,26 @@ public class Gcd {
         System.out.print("Enter number a: ");
         BigInteger a;
         a = BigInteger.valueOf(input.nextInt());
+        a = a.abs();
+        
         System.out.print("Enter number b: ");
         BigInteger b;
         b = BigInteger.valueOf(input.nextInt());
+        b = b.abs();
         input.close();
+        
+        //if a is less than b switch them
+        int compare = a.compareTo(b);
+        if(compare == -1)
+        {
+           BigInteger temp1 = BigInteger.valueOf(0);
+           BigInteger temp2 = BigInteger.valueOf(0);
+           temp1 = a;
+           temp2 = b;
+           
+           a = temp2;
+           b = temp1;
+        }
         
         //(1)
         BigInteger u = BigInteger.valueOf(1);
@@ -29,15 +44,24 @@ public class Gcd {
         System.out.println("u:" +numbers[1]);
         System.out.println("v:" +numbers[2]);
         
-        
     }
-    
-
         //(2) if y = 0 , set v =( g−au)/b and return the values (g,u,v)
         public static BigInteger[] getNumbers(BigInteger a,BigInteger b, BigInteger u,BigInteger g,
             BigInteger x,BigInteger y)
         {
-                  if (y.equals(BigInteger.ZERO))
+            //Part D) SOlution
+            if(b.equals(BigInteger.valueOf(0))){
+                
+                    BigInteger[] nums = new BigInteger[3];
+                    nums[0] = a;
+                    nums[1] = BigInteger.valueOf(1);
+                    nums[2] = BigInteger.valueOf(0);
+                return(nums);
+            }
+            
+            while(true){
+                
+                /*if (y.equals(BigInteger.ZERO))
                   {
                     BigInteger[] nums = new BigInteger[3];
                     BigInteger v = (g.subtract(a.multiply(u))).divide(b);
@@ -45,8 +69,10 @@ public class Gcd {
                     nums[1] = u;
                     nums[2] = v;
                     return nums;
-                  }
-                  else {
+                  }*/
+                if (y.equals(BigInteger.ZERO))
+                    break;
+                  else{
                       //(3) Divide g by y with remainder, g = qy + t, with 0 ≤ t< y
                       BigInteger q = BigInteger.valueOf(0);
                       BigInteger t = BigInteger.valueOf(0);
@@ -57,12 +83,13 @@ public class Gcd {
                       q = g.divide(y);
                       
                       //g = qy + t
-                      g = q.multiply(y).add(t);
+                      //g = q.multiply(y).add(t);
                      
                       //(4) Set s = u−qx
                       BigInteger s = BigInteger.valueOf(0);
                       s = u.subtract(q.multiply(x));
-                      
+                      //System.out.println(s);
+
                       //(5)Set u = x and g = y
                       u = x;
                       g = y;
@@ -71,8 +98,24 @@ public class Gcd {
                       x = s;
                       y = t;
                       
-   
-                  }
-    }
+                     }
+                    
+                }
+                /*//Part A) solution
+                    BigInteger[] nums = new BigInteger[3];
+                    BigInteger v = (g.subtract(a.multiply(u))).divide(b);
+                    nums[0] = g;
+                    nums[1] = u;
+                    nums[2] = v;
+                 */
+                //Part E) Solution
+                    BigInteger[] nums = new BigInteger[3];
+                    BigInteger v = (g.subtract(a.multiply(u))).divide(b);
+                    nums[0] = g;
+                    nums[1] = u.subtract(b.divide(g));
+                    nums[2] = v.add(a.divide(g));
+                    
+                    return nums;
+            }
             
 }
