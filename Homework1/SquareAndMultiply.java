@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.*;
 public class SquareAndMultiply{
 	public static void main(String[] args) {
-		//Input all of the numbers
+		//Input all of the numbers/
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter number N: ");
       BigInteger N;
