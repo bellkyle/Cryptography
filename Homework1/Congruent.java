@@ -1,6 +1,5 @@
-package congruency;
 import java.util.Scanner;
-//import java.math.BigInteger;
+import java.math.BigInteger;
 
 /*
  * Notes: 	The inputs are of form x = a (mod n)
@@ -29,16 +28,16 @@ public class Congruent {
 		System.out.println("Enter number of congruencies you want to solve: ");
 		cases = input.nextInt();
 		
-		int[] numbers = new int[cases];
-		int[] mods = new int[cases];
+		BigInteger[] numbers = new BigInteger[cases];
+		BigInteger[] mods = new BigInteger[cases];
 		
 		for(int i = 0; i < cases; i++)
 		{
 			System.out.println("Enter a number: ");
-			numbers[i] = input.nextInt();
+			numbers[i] = BigInteger.valueOf(input.nextInt());
 			
 			System.out.println("Enter the modulo: ");
-			mods[i] = input.nextInt();
+			mods[i] = BigInteger.valueOf(input.nextInt());
 		}
 		input.close();
 		
@@ -47,14 +46,14 @@ public class Congruent {
 	}
 
 	//Calculating X where X = a1M1y1 + a2M2y2 + ... + akMkyk (mod M)
-	public static int calculateX(int[] numbers, int[] mods)
+	public static BigInteger calculateX(BigInteger[] numbers, BigInteger[] mods)
 	{
 		//variables
 		int length = numbers.length;
-		int M = 0;
-		int sum = 0;
-		int[] Mis = new int[length];
-		int[] yis = new int[length];
+		BigInteger M = BigInteger.valueOf(0);
+		BigInteger sum = BigInteger.valueOf(0);
+		BigInteger[] Mis = new BigInteger[length];
+		BigInteger[] yis = new BigInteger[length];
 		
 		M = calculateM(length, mods);
 		
@@ -65,64 +64,64 @@ public class Congruent {
 		sum = calculateSum(length, numbers, Mis, yis);
 		
 		//Returning X
-		return sum % M;
+		return sum.mod(M);
 	}
 	
 	//Calculating M where M = n1n2...nk
-	public static int calculateM(int length, int[] mods)
+	public static BigInteger calculateM(int length, BigInteger[] mods)
 	{
-		int M = 1;
+		BigInteger M = BigInteger.valueOf(1);
 		
 		for(int i = 0; i < length; i++)
 		{
-			M = M * mods[i];
+			M = M.multiply(mods[i]);
 		}
 		return M;
 	}
 	
 	//Calculating Mi where Mi = M/ni
-	public static int[] calculateMis(int length, int M, int[] mods)
+	public static BigInteger[] calculateMis(int length, BigInteger M, BigInteger[] mods)
 	{
-		int[] Mis = new int[length];
+		BigInteger[] Mis = new BigInteger[length];
 		
 		for(int i = 0; i <length; i++)
 		{
-			Mis[i] = M / mods[i];
+			Mis[i] = M.divide(mods[i]);
 		}
 		return Mis;
 	}
 	
 	//Calculating yi where Miyi = 1 (mod ni)  (congruent)
 	//Not complete waiting for Extended Euclidean Algorithm to be completed
-	public static int[] calculateYis(int length, int[] Mis, int[] mods)
+	public static BigInteger[] calculateYis(int length, BigInteger[] Mis, BigInteger[] mods)
 	{
-		int[] yis = new int[length];
+		BigInteger[] yis = new BigInteger[length];
 		int temp = 0;
 		
 		//I believe this will be used after the gcd is calculated
 		for(int i = 0; i < length; i++)
 		{
-			for(int j = 0; j < mods[i]; j++)
+			for(int j = 0; j < mods[i].intValue(); j++)
 			{
-				if((Mis[i] * j) % mods[i] == 1)
+				if((Mis[i].multiply(BigInteger.valueOf(j)).mod(mods[i])).compareTo(BigInteger.ONE) == 0)
 				{
 					temp = j;
-					j = mods[i];
+					j = mods[i].intValue();
 				}
 			}
-			yis[i] = temp;
+			yis[i] = BigInteger.valueOf(temp);
 		}
 		return yis;
 	}
 	
 	//Calculating the sum of aiMiyi for 0 <= i <= k
-	public static int calculateSum(int length, int[] numbers, int[] Mis, int[] yis)
+	public static BigInteger calculateSum(int length, BigInteger[] numbers, BigInteger[] Mis, BigInteger[] yis)
 	{
-		int sum = 0;
+		BigInteger sum = BigInteger.valueOf(0);
 		
 		for(int i = 0; i < length; i++)
 		{
-			sum = sum + (numbers[i] * Mis[i] * yis[i]);
+			sum = sum.add(numbers[i].multiply(Mis[i].multiply(yis[i])));
 		}
 		return sum;
 	}
