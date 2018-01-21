@@ -5,7 +5,7 @@ import java.math.BigInteger;
  * Notes: 	The inputs are of form x = a (mod n)
  * 			M = n1n2...nk where k is the number of inputs
  * 			x = a1M1y1 + a2M2y2 + ... + akMkyk (mod M)
- * 			Mi = M/ni
+ * 		Mi = M/ni
  * 			Miyi = 1 (mod ni)
  * 
  * 			Also, I have not worked much with Big Integer so this program 
