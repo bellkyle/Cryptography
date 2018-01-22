@@ -1,4 +1,3 @@
-package gcd;
 import java.math.BigInteger;
 import java.util.*;
 
