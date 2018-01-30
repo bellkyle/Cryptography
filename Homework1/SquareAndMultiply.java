@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.*;
+//1.25
 public class SquareAndMultiply{
 	public static void main(String[] args) {
 		//Input all of the numbers/

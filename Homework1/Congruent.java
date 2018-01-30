@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.math.BigInteger;
-
+//1.23
 /*
  * Notes: 	The inputs are of form x = a (mod n)
  * 			M = n1n2...nk where k is the number of inputs

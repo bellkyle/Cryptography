@@ -1,6 +1,6 @@
 import java.math.BigInteger;
 import java.util.*;
-
+//1.12
 public class Gcd {
     /**
      * @param args the command line arguments
