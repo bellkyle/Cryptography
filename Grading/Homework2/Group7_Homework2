@@ -1,0 +1,234 @@
+Homework 2, Group 7 Cryptography
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 1.26
+
+We use a proof by contradiction.
+Suppose there are a finite number of primes given by {p1,p2,...pr}.
+We can multiply these numbers together and add one to get new primes like in the examples below.
+
+If we have a set of prime numbers {2,3,5,7} then 2*3*5*7+1 = 211.
+In this case 211 is only divisible by itself and 1, therefore it is a prime not on the list.
+Computing N(mod pr) with the initial set yields 1.
+
+In another example we have a set of primes, {3,7,11} then 3*7*11+1 =232.
+In this case we have 2*2*2*29 = 232. 2 and 29 are primes not in the original set.
+We can add the primes 2 and 29 into the set to extend it to {2,3,7,11,29}.
+Computing N(mod pr) with any values of the original set yields 1.
+
+These examples show a contradiction. So, there are an infinitely more primes numbers.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 1.31
+
+a) a is in the set of all primes, and b = a^(p-1)/q. From proposition 1.30, it is shown that if a is an integer that
+in not divisible by p, then a^n is identical to 1(mod p), and the order of a mod p divides n, and thus the order of a divides p - 1.
+Thus, this works when b = 1. 
+An easy way to see this would be to plug in two arbitrary numbers for p and q.
+For this example, I will use p = 31, and q = 3. Using the given equation of b = a^(p-1)/q, and a^n = 1(mod p),
+we get b = a^10 is identical to 1(mod 31), which means that b = 1(mod 31), which is 1.
+
+If b does not equal 1, then we can look to Fermat's little theorem to prove that b has order q. This is because
+it was proven that b divides the prime q, but since q is a prime that is hard to divide, b is forced to have order q through its primality.
+
+
+b) In the last step, it was established that due to the primality of q, b, which was divided by q, was either 1 or had order q.
+However, out of the set of all a values in the set of primes, having order q is actually quite rare.
+This is because we are looking for an a where the order of a is a divisor for (p-1)/q.
+By theorem 1.31, it is showsn that if p is a prime, then there is an element g, where g is the primitive root of FsubP.
+This means that a is identical to g^k(mod p) and is equal to a^(p-1)/q, which means that (g^k)^(p-1)/q is identical to 1 (mod p),
+as long as q divides k. In total, there are p - 1 different possibilities with (p - 1)/q different q values, which means that 1/q% of the values will not work.
+So there is a (1 - (1/q))% chance to find an element of the set of primes FsubP of order q off of a random guess.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 1.32
+
+a)		(i) false,   (ii) true,    (iii) true,    (iv) false
+b)		(i) true,    (ii) true,    (iii) false,   (iv) true
+
+c)
+Primitive roots of 23 : [5, 7, 10, 11, 14, 15, 17, 19, 20, 21]
+Primitive roots of 29 : [2, 3, 8, 10, 11, 14, 15, 18, 19, 21, 26, 27]
+Primitive roots of 41 : [6, 7, 11, 12, 13, 15, 17, 19, 22, 24, 26, 28, 29, 30, 34, 35]
+Primitive roots of 43 : [3, 5, 12, 18, 19, 20, 26, 28, 29, 30, 33, 34]
+
+d)	[2, 6, 7, 8]    count = 4
+
+e)	[6, 7, 10, 23, 24, 28, 29, 31, 35, 38, 39, 40, 41, 47, 50, 59, 63, 65, 66, 67, 69, 72, 73, 74, 77, 79, 87, 90, 92, 96, 98, 102, 105, 110, 112, 113, 116, 117, 119, 124, 127, 131, 133, 137, 139, 142, 150, 152, 155, 156, 157, 160, 162, 163, 164, 166, 170, 179, 182, 188, 189, 190, 191, 194, 198, 200, 201, 205, 206, 219, 222, 223] count = 72
+
+f)	Primes less than 100 with 2 as a primitive root : 3, 5, 11, 13, 19, 29, 37, 53, 59, 61, 67, 83, 
+
+g)	Primes less than 100 with 3 as a primitive root : 5, 7, 17, 19, 29, 31, 43, 53, 79, 89, 
+	Primes less than 100 with 4 as a primitive root : (None)
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 1.33
+
+We use a proof by contradiction, say g isn't a primitive value.
+Since 2q = p-1 and p is a prime, we can derive the equation g ^ 2q = 1 (mod p).
+Now since q is a prime, then the only factors of 2q are 2 and q, and since g isn't a primitive value, then either g ^ 2 = 1 (mod p) or g ^ q = 1 (mod p).
+If g ^ 2 = 1 (mod p), then either g = 1 (mod p) or g = -1 (mod p), a contradiction of the first condition,
+whereas g ^ q = 1 (mod p) would contradict the second condition.
+Since both cases yield a contradiction, we can conclude that g is a primitive value.
+ 
+ -------------------------------------------------------------------------------------------------------------------
+
+Problem 1.34
+
+a)
+  If b has at least one square root modulo p, then b it has to have exactly two square roots modulo p.
+  If a is a square root of b mod p. Since p doesn't divide b, a !≡ 0 (mod p). Then, p doesn't divide a and so gcd(a, p) = 1.
+  Since a^2 ≡ b (mod p), it follows that (−a)^2 ≡ a^2 ≡ b (mod p), and so −a must also be a square root of b (mod p).
+  If we had a ≡ −a (mod p), then 2a ≡ 0 (mod p), and so p divides 2a.
+  Since gcd(a, p) = 1, p divides 2a and gcd(a, p) = 1 imply that p divides 2, contrary to the assumption that p is an odd prime.
+  Hence a !≡ −a (mod p), and so b has at least two square roots.
+  Next we show that b cannot have more than 2 square roots.
+  Suppose that for some c in the set of all primes, such that c !≡ a (mod p) and c !≡ −a (mod p) but c^2 ≡ b (mod p).
+  Then we have a^2 ≡ b ≡ c^2 (mod p), or equivalently, (a − c)(a + c) ≡ a^2 − c^2 ≡ b − b ≡ 0 (mod p).
+  This means in p divides (a − c)(a + c). Since p is a prime, either p divides (a − c), meaning that c ≡ a (mod p), or p divides (a + c), meaning that c ≡ −a (mod p).
+  Either way will lead to a contradiction to the assumption that c !≡ a (mod p) and c !≡ −a (mod p). Thus, b must have exactly two square roots, if it has at least one.
+  If p = 2, then -1 ≡ 1 (mod 2), so they are actually one root, therefore there is only one independent value (1) satisfying X^2 ≡ b (mod p)
+  If p | b, then b (mod p) = 0, therefore there is only one value (0) satisfying X^2 ≡ b (mod p)
+
+b)
+  2^2 ≡ 4 (mod 7), 3^2 ≡ 2 (mod 7), 4^2 ≡ (−3)^2 ≡ 2 (mod 7)
+  Therefore, x^2 ≡ 2 (mod 7) has solutions x ≡ 3, 4
+
+  2^2 ≡ 4 (mod 11), 3^2 ≡ 9 (mod 11), 4^2 ≡ 5 (mod 11), 5^2 ≡ 3 (mod 11), 6^2 ≡ 3 (mod 11), 7^2 ≡ (-4)^2 ≡ 5 (mod 11).
+  Therefore, x^2 ≡ 5 (mod 11) has solutions x ≡ 4, 7
+
+  1^2 ≡ 1 (mod 11), 2^2 ≡ 4 (mod 11), 3^2 ≡ 9 (mod 11), 4^2 ≡ 5 (mod 11), 5^2 ≡ 3 (mod 11), 6^2 ≡ 3 (mod 11), 7^2 ≡ 5 (mod 11), 8^2 ≡ 9 (mod 11), 9^2 ≡ 4 (mod 11), 10^2 ≡ 1 (mod 11), 11^2 ≡ 0 (mod 11).
+  Therefore, x^2 ≡ 7 (mod 11) has no solutions, because this pattern repeats and does not include a 7.
+
+  2^2 ≡ 4 (mod 37), 3^2 ≡ 9 (mod 37), 4^2 ≡ 8 (mod 37), 5^2 ≡ 25 (mod 37), 6^2 ≡ 36 (mod 37), 7^2 ≡ 12 (mod 37), 8^2 ≡ 27 (mod 37), 9^2 ≡ 7 (mod 37), 10^2 ≡ 26 (mod 37), 11^2 ≡ 10 (mod 37), 12^2 ≡ 33 (mod 37), 13^2 ≡ 21 (mod 37), 14^2 ≡ 11 (mod 37), 15^2 ≡ 3 (mod 37), .... , 22^2 ≡ (-15)^2 = 3 (mod 37)
+  Therefore, x^2 ≡ 3 (mod 37) has solutions x ≡ 15, 22
+
+c)
+  8^2 ≡ 29 (mod 35), 13^2 ≡ 29 (mod 35), 27^2 ≡ 29 (mod 35)
+  x^2 ≡ 29 (mod 35) has 3 solutions: x ≡ 8, 13, and 27. This doesn't contradict because 35 is not a prime number.
+
+d)
+  Suppose k is even. Let 2x = k. Then a ≡ g^k ≡ g^2x ≡ (g^x)^2, so g^x is a square root of g^k.
+  Suppose k is odd. Let 2x + 1 = k. Suppose there is a root r of k (mod p).
+  Then we can write r as g^y for some y. Then g^(2x+1) ≡ k ≡ r^2 ≡ g^(2y), so 2x + 1 ≡ 2y (mod p − 1) Then (p − 1) divides (2x + 1 − 2y), which is impossible, because (p − 1) is even and (2x + 1 − 2y) is odd.
+  This means that a has a square root (mod p) if and only if k is even.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 1.36
+
+2 ^ (3-1)/2 (mod 3) = 2.0
+2 ^ (5-1)/2 (mod 5) = 4.0
+2 ^ (7-1)/2 (mod 7) = 1.0
+2 ^ (11-1)/2 (mod 11) = 10.0
+2 ^ (13-1)/2 (mod 13) = 12.0
+2 ^ (17-1)/2 (mod 17) = 1.0
+2 ^ (19-1)/2 (mod 19) = 18.0
+
+Conjecture : 2 ^ [(p-1) / 2] (mod p) will always yield 1 or (p-1)
+
+Proof : Use Fermat's Little Theorem. It says that, for any number n, n ^ (p-1) = 1 (mod p).
+If you square root both sides, you get n ^ [(p-1) / 2] = sqrt(1) (mod p).
+Since the square root of 1 is either 1 or -1, the right side of the equation become +/- 1 (mod p)
+Finally, since -1 = p-1 (mod p), we end up with the equation 2 ^ [(p-1) / 2] = 1 (mod p) OR p-1 (mod p)
+
+-------------------------------------------------------------------------------------------------------------------
+
+// Source code for problems 1.32 and 1.36
+
+import java.util.*;
+import java.math.*;
+
+public class Homework_2
+{
+	public static void problem132()
+	{
+		System.out.println( primitiveCheck( 2, 7 ) + "\t" + primitiveCheck( 2, 13 ) + "\t" + primitiveCheck( 2, 19 ) + "\t" + primitiveCheck( 2, 23 ) );
+		System.out.println( primitiveCheck( 3, 5 ) + "\t" + primitiveCheck( 3, 7 ) + "\t" + primitiveCheck( 3, 11 ) + "\t" + primitiveCheck( 3, 17 ) );
+		
+		System.out.println( allPrimitiveValues(23).toString() );
+		System.out.println( allPrimitiveValues(29).toString() );
+		System.out.println( allPrimitiveValues(41).toString() );
+		System.out.println( allPrimitiveValues(43).toString() );
+		
+		System.out.println( allPrimitiveValues(11).toString() + "\tcount = " + allPrimitiveValues(11).size() );
+		
+		System.out.println( allPrimitiveValues(229).toString() + "\tcount = " + allPrimitiveValues(229).size() );
+		
+		System.out.print("Primes less than 100 with 2 as a primitive root : ");
+		for(int i = 3; i < 100; i++)
+			if( primeCheck(i) )
+				if( primitiveCheck(2,i) )
+					System.out.print(i+", ");
+		System.out.println();
+		
+		System.out.print("Primes less than 100 with 3 as a primitive root : ");
+		for(int i = 4; i < 100; i++)
+			if( primeCheck(i) )
+				if( primitiveCheck(3,i) )
+					System.out.print(i+", ");
+		System.out.println();
+		
+		System.out.print("Primes less than 100 with 4 as a primitive root : ");
+		for(int i = 5; i < 100; i++)
+			if( primeCheck(i) )
+				if( primitiveCheck(4,i) )
+					System.out.print(i+", ");
+		System.out.println();
+	}
+	
+	public static void problem136()
+	{
+		for(int i = 3; i <= 20; i++)
+		{
+			if( primeCheck(i) )
+				System.out.println( "2 ^ (" + i + "-1)/2 (mod " + i + ") = " + Math.pow( 2.0, (i-1.0)/2.0 ) % i );
+		}
+	}
+	
+	public static boolean primeCheck( int n )
+	{
+		for(int i = 2; i < n; i++)
+			if( n % i == 0 )
+				return false;
+		return true;
+	}
+	
+	public static boolean primitiveCheck( int possible, int mod )
+	{
+		boolean[] values = new boolean[mod];
+		int power = possible;
+		
+		for(int i = 1; i < mod; i++)
+		{
+			power = power * possible % mod;
+			if( values[ power ] == false)
+				values[ power ] = true;
+			else
+				return false;
+		}
+		
+		return true;
+	}
+	
+	public static ArrayList<Integer> allPrimitiveValues( int prime )
+	{
+		ArrayList<Integer> retset = new ArrayList<Integer>();
+		for(int i = 2; i < prime; i++)
+			if( primitiveCheck(i,prime) )
+				retset.add(i);
+		return retset;
+	}
+	
+	
+	
+	public static void main(String[] args)
+	{
+		problem132();
+		problem136();
+	}
+}
