@@ -32,34 +32,75 @@ public class BabyStepGiantStep {
     
     //find multiplicative order N
     System.out.println("Finding multiplicative order. A^k(mod N ) = 1");
-    System.out.println("Enter A");
+    /*System.out.println("Enter A");
     BigInteger A;
     A = BigInteger.valueOf(input.nextInt());
     
-    System.out.println("Enter N");
+    //System.out.println("Enter N");
     BigInteger N;
-    N = BigInteger.valueOf(input.nextInt());
-    //n = 1 + floor of square root of N
-    //will need to create a method to calculate this
-    BigInteger n;
+    N = BigInteger.valueOf(input.nextInt());*/
    
     
     BigInteger mOrder;
-    mOrder = multiplicativeOrder(A,N);
+    mOrder = multiplicativeOrder(g,p); //this is our k
+    System.out.println("Multiplicative order: " +mOrder);
+    
+    //n = 1 + floor of square root of N
+    BigInteger n;
+    n = sqrt(mOrder).add(BigInteger.ONE);
+    System.out.println("sqrt: " + n);
     
     
     //1st item listA
     BigInteger firstA;
-    firstA = pow(g,mOrder);
+    firstA = pow(g,mOrder).mod(p);
     //2nd item listA
-    listA.add(g);
+    listA.add(g.mod(p));
     //1st item listB
-    listB.add(h);
+    //listB.add(h.mod(p));
     //2nd item listB
-    BigInteger secondB;
+    //BigInteger secondB;
+    //secondB = pow(g,n.negate());
+    listB.add(h.multiply(g.modPow(n.negate(), p)).mod(p));
+    
+    for(BigInteger i = BigInteger.valueOf(2); i.compareTo(n)< 0; i = i.add(BigInteger.ONE))    
+    {
+        listA.add(pow(g,i).mod(p));
+        listB.add(h.multiply(g.modPow(n.negate().multiply(i), p)).mod(p));        
+        i.add(BigInteger.ONE);
+    }
+    System.out.println("list A: " + Arrays.toString(listA.toArray()));
+    System.out.println("list B: " + Arrays.toString(listB.toArray()));
     
     
+    int A = 0;
+    int B = 0;
+    boolean test = false;
+    for ( int x =0; x < listA.size(); x++)
+    {
+        for (int y = 0; y < listB.size(); y++)
+        {
+            if ( listA.get(x).equals(listB.get(y)))
+            {
+                test = true;
+                A = x + 1;
+                B = y + 1;
+                break;
+            }
+        }
+        if(test)
+        {
+            break;
+        }
+            
+    }
+    //Then x = i + jn is a solution to gx = h.
+    BigInteger i = BigInteger.valueOf(A);
+    BigInteger j = BigInteger.valueOf(B);
     
+    BigInteger solution;
+    solution = i.add(j.multiply(n));
+    System.out.println("Solution: " + solution);
        
         
     }
@@ -72,6 +113,20 @@ public class BabyStepGiantStep {
     exponent = exponent.shiftRight(1);
   }
   return result;
+}
+    
+    public static BigInteger sqrt(BigInteger n) {
+	BigInteger a = BigInteger.ONE;
+	BigInteger b = n.shiftRight(5).add(BigInteger.valueOf(8));
+	while (b.compareTo(a) >= 0) {
+		BigInteger mid = a.add(b).shiftRight(1);
+		if (mid.multiply(mid).compareTo(n) > 0) {
+			b = mid.subtract(BigInteger.ONE);
+		} else {
+			a = mid.add(BigInteger.ONE);
+		}
+	}
+	return a.subtract(BigInteger.ONE);
 }
     
     
