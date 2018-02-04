@@ -1,0 +1,23 @@
+Grading Part 1.34
+a) Their proof to show that X2 ≡ b (mod p) has either two solutions or no solutuions
+	does the job in proving it.
+b) 	
+	i)
+	Correct
+	The solutions were found to be x = 3, 4
+	ii)
+	Correct
+	The solutions were found to be x = 4, 7
+	iii)
+	Correct
+	There were no solutions
+	iv)
+	Correct
+	Solutions were found
+c)
+	Correct
+	Another solution was found which did not contradict.
+d)
+	Correct
+	It was proven that k has a square root if and only if k is even.
+
