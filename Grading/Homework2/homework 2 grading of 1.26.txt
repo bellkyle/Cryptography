@@ -1,0 +1,2 @@
+1.26
+The provide two good examples that contradict the assumption that there are a finite number of primes by showing that there will always be a new prime created by using the equation they have use. Very good job!
