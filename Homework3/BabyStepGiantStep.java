@@ -1,4 +1,3 @@
-package babystepgiantstep;
 import java.io.*;
 import java.util.*;
 import java.math.BigInteger;
@@ -20,16 +19,16 @@ public class BabyStepGiantStep {
         
     System.out.println("Enter g");
     BigInteger g;
-    g = BigInteger.valueOf(input.nextInt());
+    g = input.nextBigInteger();
     
     System.out.println("Enter h");
     BigInteger h;
-    h = BigInteger.valueOf(input.nextInt());
+    h = input.nextBigInteger();
     
     System.out.println("Enter p");
     BigInteger p;
-    p = BigInteger.valueOf(input.nextInt());
-    
+    p = input.nextBigInteger();
+    input.close();
     //find multiplicative order N
     System.out.println("Finding multiplicative order. A^k(mod N ) = 1");
     /*System.out.println("Enter A");
@@ -55,15 +54,15 @@ public class BabyStepGiantStep {
     BigInteger firstA;
     firstA = pow(g,mOrder).mod(p);
     //2nd item listA
-    listA.add(g.mod(p));
+    listA.add(firstA);
     //1st item listB
     //listB.add(h.mod(p));
     //2nd item listB
     //BigInteger secondB;
     //secondB = pow(g,n.negate());
-    listB.add(h.multiply(g.modPow(n.negate(), p)).mod(p));
-    
-    for(BigInteger i = BigInteger.valueOf(2); i.compareTo(n)< 0; i = i.add(BigInteger.ONE))    
+    listB.add(h);
+       
+    for(BigInteger i = BigInteger.valueOf(1); i.compareTo(n)< 0; i = i.add(BigInteger.ONE))    
     {
         listA.add(pow(g,i).mod(p));
         listB.add(h.multiply(g.modPow(n.negate().multiply(i), p)).mod(p));        
@@ -83,8 +82,8 @@ public class BabyStepGiantStep {
             if ( listA.get(x).equals(listB.get(y)))
             {
                 test = true;
-                A = x + 1;
-                B = y + 1;
+                A = x;
+                B = y;
                 break;
             }
         }
