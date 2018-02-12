@@ -1,29 +1,22 @@
-package congruency;
+package congruent;
 import java.util.Scanner;
 import java.math.BigInteger;
 
-/*
- * Notes: 	The inputs are of form x = a (mod n)
- * 			M = n1n2...nk where k is the number of inputs
- * 			x = a1M1y1 + a2M2y2 + ... + akMkyk (mod M)
- * 			Mi = M/ni
- * 			Miyi = 1 (mod ni)
- * 
- * 			Also, I have not worked much with Big Integer so this program 
- * 			does not use Big Integers, but the functionality will need to be
- * 			added prior to submission.  Feel free to alter the code to work
- * 			with Big Integers while I am learning about them.
- * 
- * 			I am having trouble calculating the y's because you have to solve
- * 			for the inverse.  I believe that the Extended Euclidean Algorithm
- * 			is used to solve this.
- * 
- */
+
+
+
+/*I tried x ≡ 1 (mod 5) and x ≡ 9 (mod 11).
+and got the correct answer x = 31
+but am confused on how to solve with more than 2
+*/
 public class Congruent {
 
-	public static void main(String[] args) 
-	{
-		int cases = 0;
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+int cases = 0;
 		Scanner input = new Scanner(System.in);
 		
 		//Getting user input
@@ -31,8 +24,9 @@ public class Congruent {
 		cases = input.nextInt();
 		
 		BigInteger[] numbers = new BigInteger[cases];
-		BigInteger[] mods = new BigInteger[cases];
-		
+		BigInteger[] mods = new BigInteger[cases];              
+                
+                
 		for(int i = 0; i < cases; i++)
 		{
 			System.out.println("Enter a number: ");
@@ -42,7 +36,28 @@ public class Congruent {
 			mods[i] = BigInteger.valueOf(input.nextInt());
 		}
 		input.close();
-		
+                
+                
+                //---------------------
+                //Find u
+                BigInteger u = BigInteger.valueOf(1);
+                
+                BigInteger x = BigInteger.valueOf(0);
+                //our a is Mis
+                BigInteger M = BigInteger.valueOf(0);
+                int length = numbers.length;
+                BigInteger [] Mis = calculateMis(length, M, mods);
+                BigInteger g = numbers[0];
+                //our b mods[i]
+                BigInteger y = numbers[1];
+                
+                BigInteger numberU = getU(numbers[0],numbers[1],u,g,x,y);
+                
+                
+                
+                
+                
+		//-----------------------
 		//output of method here
 		System.out.println("X = " + calculateX(numbers, mods));
 	}
@@ -144,4 +159,75 @@ public class Congruent {
 		}
 		return sum;
 	}
-}
+        
+        
+        
+        public static BigInteger getU(BigInteger a,BigInteger b, BigInteger u,BigInteger g,
+            BigInteger x,BigInteger y)
+        {
+        int compare = a.compareTo(b);
+        if(compare == -1)
+        {
+           BigInteger temp1 = BigInteger.valueOf(0);
+           BigInteger temp2 = BigInteger.valueOf(0);
+           temp1 = a;
+           temp2 = b;
+           
+           a = temp2;
+           b = temp1;
+        }
+        //Part D) SOlution
+            if(b.equals(BigInteger.valueOf(0))){
+                return BigInteger.valueOf(1);
+            }
+            
+            while(true){
+                if (y.equals(BigInteger.ZERO))
+                    break;
+                  else{
+                      //(3) Divide g by y with remainder, g = qy + t, with 0 ≤ t< y
+                      BigInteger q = BigInteger.valueOf(0);
+                      BigInteger t = BigInteger.valueOf(0);
+                      
+                      //remainder
+                      t = g.remainder(y);
+                      //qutotient
+                      q = g.divide(y);
+                      
+                      //g = qy + t
+                      //g = q.multiply(y).add(t);
+                     
+                      //(4) Set s = u−qx
+                      BigInteger s = BigInteger.valueOf(0);
+                      s = u.subtract(q.multiply(x));
+                      //System.out.println(s);
+
+                      //(5)Set u = x and g = y
+                      u = x;
+                      g = y;
+                      
+                      //(6) Set x = s and y = t
+                      x = s;
+                      y = t;
+                      
+                     }
+                    
+                }
+                /*//Part A) solution
+                    BigInteger[] nums = new BigInteger[3];
+                    BigInteger v = (g.subtract(a.multiply(u))).divide(b);
+                    nums[0] = g;
+                    nums[1] = u;
+                    nums[2] = v;
+                 */
+                //Part E) Solution
+                    /*BigInteger[] nums = new BigInteger[3];
+                    BigInteger v = (g.subtract(a.multiply(u))).divide(b);
+                    nums[0] = g;*/
+                    BigInteger numberU = u.subtract(b.divide(g));
+                    //nums[2] = v.add(a.divide(g));
+                    
+                    return numberU;
+            }
+            
+        }
