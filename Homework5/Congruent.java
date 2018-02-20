@@ -6,10 +6,7 @@ import java.util.*;
 
 
 
-/*I tried x ≡ 1 (mod 5) and x ≡ 9 (mod 11).
-and got the correct answer x = 31
-but am confused on how to solve with more than 2
-*/
+
 public class Congruent {
 
     public Congruent() {

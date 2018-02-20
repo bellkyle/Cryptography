@@ -21,31 +21,31 @@ public class BabyStepGiantStep {
         
     /*Scanner input = new Scanner(System.in);
         
-    System.out.println("Enter g");
+    //System.out.println("Enter g");
     BigInteger g;
     g = input.nextBigInteger();
     
-    System.out.println("Enter h");
+    //System.out.println("Enter h");
     BigInteger h;
     h = input.nextBigInteger();
     
-    System.out.println("Enter p");
+    //System.out.println("Enter p");
     BigInteger p;
     p = input.nextBigInteger();
     input.close();*/
     //find multiplicative order N
-    //System.out.println("Finding multiplicative order. A^k(mod N ) = 1");
-    /*System.out.println("Enter A");
+    ////System.out.println("Finding multiplicative order. A^k(mod N ) = 1");
+    /*//System.out.println("Enter A");
     BigInteger A;
     A = BigInteger.valueOf(input.nextInt());
     
-    //System.out.println("Enter N");
+    ////System.out.println("Enter N");
     BigInteger N;
     N = BigInteger.valueOf(input.nextInt());*/
    
     
     BigInteger mOrder;
-    mOrder = multiplicativeOrder(g,p); //this is our k
+    mOrder = p.subtract(BigInteger.ONE); //this is our k
     //System.out.println("Multiplicative order: " +mOrder);
     
     //n = 1 + floor of square root of N
@@ -104,7 +104,7 @@ public class BabyStepGiantStep {
     BigInteger solution;
     solution = i.add(j.multiply(n));
     return solution;
-    //System.out.println("Solution: " + solution);
+    ////System.out.println("Solution: " + solution);
        
         
     }

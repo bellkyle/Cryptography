@@ -22,18 +22,29 @@ public class PohligHellman {
 	    input.close();
 	    
 	   	//find the order    
-	    BigInteger N = multiplicativeOrder(g, p);
+	    BigInteger N = p.subtract(BigInteger.ONE);
 	    
 	    BabyStepGiantStep dlp = new BabyStepGiantStep();
 	    ArrayList<BigInteger> xValues = new ArrayList<BigInteger>();
 	    //find prime factors
 		primeFactors(N);
+		//System.out.println("Out of prime");
 		BigInteger gq;
 		BigInteger hq;
+		//System.out.println(dlp.solve(g, h, p));
+		boolean flag = true;
+		for(int i = 0; i < listQ.size(); i++) {
+			if(listQ.get(i).compareTo(BigInteger.valueOf(11)) == 1)
+				flag = false;
+		}
+		if(flag) {
 		for(int i = 0; i < listQ.size(); i++) {
 			//solve the dlp for with respect to all q values
+			
 			gq = pow(g, (N.divide(pow(listQ.get(i), listE.get(i))))).mod(p);
+			
 			hq = pow(h, (N.divide(pow(listQ.get(i), listE.get(i))))).mod(p);
+			
 			xValues.add(dlp.solve(gq, hq, p));
 		}
 		for(int i = 0; i < listQ.size(); i++) {
@@ -47,6 +58,9 @@ public class PohligHellman {
 		Congruent x = new Congruent();
 		
 		System.out.println("The solution is x = " + x.solve(xValues.size(), xValues, listQ, listE));
+		}
+		else
+			System.out.println("The solution is x = " + dlp.solve(g, h, p));
 	}
 	
 	// A function to print all prime factors
@@ -63,6 +77,7 @@ public class PohligHellman {
         		listQ.add(BigInteger.valueOf(2));
         	count++;
             n = n.divide(BigInteger.valueOf(2));
+            //System.out.println("Divide 2" + n);
         }
         if(count != 0) {
         	listE.add(index, BigInteger.valueOf(count));
@@ -71,19 +86,27 @@ public class PohligHellman {
         
         // n must be odd at this point.  So we can
         // skip one element (Note i = i +2)
-        for (int i = 3; i <= Math.sqrt(n.intValue()); i+= 2)
+        for (int i = 3; sqrt(n).compareTo(BigInteger.valueOf(i)) >= 0; i+= 2)
         {
         	count = 0;
+        	//System.out.println(i + " " + Math.sqrt(n.intValue()));
             // While i divides n, print i and divide n
             while (n.mod(BigInteger.valueOf(i)).compareTo(BigInteger.ZERO) == 0)
             {
             	if(!listQ.contains(BigInteger.valueOf(i)))
             		listQ.add(BigInteger.valueOf(i));
             	count++;
+            	//System.out.println(i);
+            	//System.out.println(count + " " + (n.mod(BigInteger.valueOf(i)).compareTo(BigInteger.ZERO)));
                 n = n.divide(BigInteger.valueOf(i));
             }
             if(count != 0) {
             	listE.add(index, BigInteger.valueOf(count));
+            	BigInteger c = BigInteger.ONE;
+            	//for(int j = 0; j < listE.size(); j++) {
+            	//	System.out.println(listQ.get(j).toString()+ " " + listE.get(j).toString());
+            	//}
+            	//System.out.println("adding" + " " + c.toString());
             	index++;
             }
         }
@@ -92,7 +115,8 @@ public class PohligHellman {
         // n is a prime number greater than 2
         if (n.compareTo(BigInteger.valueOf(2)) == 1) {
         	listQ.add(n);
-        	listE.add(index, n);
+        	//System.out.println(n);
+        	listE.add(index, BigInteger.ONE);
         }
     }
     
@@ -102,6 +126,19 @@ public class PohligHellman {
 		return GCD(b, a.mod(b));
 	}
 	
+    public static BigInteger sqrt(BigInteger x) {
+        BigInteger div = BigInteger.ZERO.setBit(x.bitLength()/2);
+        BigInteger div2 = div;
+        // Loop until we hit the same value twice in a row, or wind
+        // up alternating.
+        for(;;) {
+            BigInteger y = div.add(x.divide(div)).shiftRight(1);
+            if (y.equals(div) || y.equals(div2))
+                return y;
+            div2 = div;
+            div = y;
+        }
+    }
 	public static BigInteger multiplicativeOrder(BigInteger A, BigInteger N) {
 		if(GCD(A, N).compareTo(BigInteger.ONE) != 0)
 			return BigInteger.valueOf(-1);
@@ -122,13 +159,16 @@ public class PohligHellman {
 	}
 	
     public static BigInteger pow(BigInteger base, BigInteger exponent) {
-  BigInteger result = BigInteger.ONE;
-  while (exponent.signum() > 0) {
-    if (exponent.testBit(0)) result = result.multiply(base);
-    base = base.multiply(base);
-    exponent = exponent.shiftRight(1);
-  }
-  return result;
-}
+    	BigInteger result = BigInteger.valueOf(1);
+    	BigInteger index = BigInteger.valueOf(0);
+    	while(index.compareTo(exponent) < 0)
+  		{
+  			result = result.multiply(base);
+  			index = index.add(BigInteger.valueOf(1));
+  			//System.out.println(index + " " + exponent + " " + index.compareTo(exponent));
+  		}
+ 
+  		return result;
+    }
     
 }
