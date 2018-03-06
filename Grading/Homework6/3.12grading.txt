@@ -1,0 +1,4 @@
+u = 252426389 correct
+v = -496549570  correct
+1244183534252426389 *732959706-496549570 = m mod 1889570071   correct
+missing the final step, that is the value of m
