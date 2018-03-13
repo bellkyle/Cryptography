@@ -1,0 +1,6 @@
+3.35
+a) Correct. Was able to verify 5-smooth for all cases.  Showed sufficient work
+b) Correct. Was able to compute discrete logarithms. Only concern, is did not check solutions to
+	prove they were right.
+c) Correct. Was able to verfify 5-smooth
+d) Correct. Was able to solve discrete logarithm problem using previous work.
