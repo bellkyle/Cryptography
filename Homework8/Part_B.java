@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Part_B {
     public static void main (String[] args) {
-        Scanner reader = new Scanner(System.in);
+        //Scanner reader = new Scanner(System.in);
         DecimalFormat df = new DecimalFormat("#.###");
         String encrypted = "mgodtbeidapsglsakowuhxukciawlrcsoyhprtrtudrqhcengxuuqtuhabxwdgkiektsnpsekldzlvnhwefssglzrnpeaoylbyiguaafveqgjoewabzsaawlrzjpvfeykygylwubtlydkroecbpfvtpsgkipuxfbuxfuqcvymyokaglsacttuwlrxpsgiyytpsfrjfuwigxhroyazdrakcedxeyrpdobrbuehruwcueekficzehrqijezrxsyortcylfegcy\n";
         double ic1 = 0;
@@ -18,8 +18,8 @@ public class Part_B {
         double ic9 = 0;
 
 
-        System.out.println("Enter the key length");
-        int length = reader.nextInt();
+        //System.out.println("Enter the key length");
+        int length = 9;//reader.nextInt();
 
         if (length < 1) {
             System.out.println("Key length must be 1 or greater");
@@ -27,12 +27,13 @@ public class Part_B {
         }
 
         System.out.println("\nIndices of coincidence: ");
-
-        if (length >= 1) {
+        for(int j = 1; j <=length; j++){
+         System.out.println("Key Length = " + j);
+        if (j >= 1) {
             String line1 = "";
             ArrayList<Character> list1 = new ArrayList<>();
 
-            for (int i = 0; i < encrypted.length(); i += length) {
+            for (int i = 0; i < encrypted.length(); i += j) {
                 line1 += encrypted.charAt(i);
             }
 
@@ -55,16 +56,16 @@ public class Part_B {
             ic1 = pt1 / pt2;
 
             System.out.println(df.format(ic1));
-                        if (length == 1) {
-                System.out.println("\nAverage index of coincidence: " + df.format(ic1));
+                        if (j == 1) {
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(ic1));
             }
         }
 
-        if (length >= 2 ) {
+        if (j >= 2 ) {
             String line2 = "";
             ArrayList<Character> list2 = new ArrayList<>();
 
-            for (int i = 1; i < encrypted.length(); i += length) {
+            for (int i = 1; i < encrypted.length(); i += j) {
                 line2 += encrypted.charAt(i);
             }
 
@@ -88,18 +89,18 @@ public class Part_B {
 
             System.out.println(df.format(ic2));
 
-            if (length == 2) {
+            if (j == 2) {
                 double avg = (ic1 + ic2) / 2;
-                System.out.println("\nAverage index of coincidence: " + df.format(avg));
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(avg));
 
             }
         }
 
-        if (length >= 3) {
+        if (j >= 3) {
             String line3 = "";
             ArrayList<Character> list3 = new ArrayList<>();
 
-            for (int i = 2; i < encrypted.length(); i += length) {
+            for (int i = 2; i < encrypted.length(); i += j) {
                 line3 += encrypted.charAt(i);
             }
 
@@ -123,18 +124,18 @@ public class Part_B {
 
             System.out.println(df.format(ic3));
 
-            if (length == 3) {
+            if (j == 3) {
                 double avg = (ic1 + ic2 + ic3) / 3;
-                System.out.println("\nAverage index of coincidence: " + df.format(avg));
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(avg));
 
             }
         }
 
-        if (length >= 4) {
+        if (j >= 4) {
             String line4 = "";
             ArrayList<Character> list4 = new ArrayList<>();
 
-            for (int i = 3; i < encrypted.length(); i += length) {
+            for (int i = 3; i < encrypted.length(); i += j) {
                 line4 += encrypted.charAt(i);
             }
 
@@ -158,18 +159,18 @@ public class Part_B {
 
             System.out.println(df.format(ic4));
 
-            if (length == 4) {
+            if (j == 4) {
                 double avg = (ic1 + ic2 + ic3 + ic4) / 4;
-                System.out.println("\nAverage index of coincidence: " + df.format(avg));
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(avg));
 
             }
         }
 
-        if (length >= 5) {
+        if (j >= 5) {
             String line5 = "";
             ArrayList<Character> list5 = new ArrayList<>();
 
-            for (int i = 4; i < encrypted.length(); i += length) {
+            for (int i = 4; i < encrypted.length(); i += j) {
                 line5 += encrypted.charAt(i);
             }
 
@@ -193,18 +194,18 @@ public class Part_B {
 
             System.out.println(df.format(ic5));
 
-            if (length == 5) {
+            if (j == 5) {
                 double avg = (ic1 + ic2 + ic3 + ic4 + ic5) / 5;
-                System.out.println("\nAverage index of coincidence: " + df.format(avg));
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(avg));
 
             }
         }
 
-        if (length >= 6) {
+        if (j >= 6) {
             String line6 = "";
             ArrayList<Character> list6 = new ArrayList<>();
 
-            for (int i = 5; i < encrypted.length(); i += length) {
+            for (int i = 5; i < encrypted.length(); i += j) {
                 line6 += encrypted.charAt(i);
             }
 
@@ -228,18 +229,18 @@ public class Part_B {
 
             System.out.println(df.format(ic6));
 
-            if (length == 6) {
+            if (j == 6) {
                 double avg = (ic1 + ic2 + ic3 + ic4 + ic5 + ic6) / 6;
-                System.out.println("\nAverage index of coincidence: " + df.format(avg));
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(avg));
 
             }
         }
 
-        if (length >= 7) {
+        if (j >= 7) {
             String line7 = "";
             ArrayList<Character> list7 = new ArrayList<>();
 
-            for (int i = 6; i < encrypted.length(); i += length) {
+            for (int i = 6; i < encrypted.length(); i += j) {
                 line7 += encrypted.charAt(i);
             }
 
@@ -263,18 +264,18 @@ public class Part_B {
 
             System.out.println(df.format(ic7));
 
-            if (length == 7) {
+            if (j == 7) {
                 double avg = (ic1 + ic2 + ic3 + ic4 + ic5 + ic6 + ic7) / 7;
-                System.out.println("\nAverage index of coincidence: " + df.format(avg));
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(avg));
 
             }
         }
 
-        if (length >= 8) {
+        if (j >= 8) {
             String line8 = "";
             ArrayList<Character> list8 = new ArrayList<>();
 
-            for (int i = 7; i < encrypted.length(); i += length) {
+            for (int i = 7; i < encrypted.length(); i += j) {
                 line8 += encrypted.charAt(i);
             }
 
@@ -298,17 +299,17 @@ public class Part_B {
 
             System.out.println(df.format(ic8));
 
-            if (length == 8) {
+            if (j == 8) {
                 double avg = (ic1 + ic2 + ic3 + ic4 + ic5 + ic6 + ic7 + ic8) / 8;
-                System.out.println("\nAverage index of coincidence: " + df.format(avg));
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(avg));
             }
         }
 
-        if (length >= 9) {
+        if (j >= 9) {
             String line9 = "";
             ArrayList<Character> list9 = new ArrayList<>();
 
-            for (int i = 8; i < encrypted.length(); i += length) {
+            for (int i = 8; i < encrypted.length(); i += j) {
                 line9 += encrypted.charAt(i);
             }
 
@@ -332,10 +333,11 @@ public class Part_B {
 
             System.out.println(df.format(ic9));
 
-            if (length == 9) {
+            if (j == 9) {
                 double avg = (ic1 + ic2 + ic3 + ic4 + ic5 + ic6 + ic7 + ic8 + ic9) / 9;
-                System.out.println("\nAverage index of coincidence: " + df.format(avg));
+                System.out.println("\nThe Average index of coincedence for key length " + j + " = " + df.format(avg));
             }
         }
+     }
     }
 }
