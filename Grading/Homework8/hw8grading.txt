@@ -1,0 +1,1 @@
+After running the code I was able to get the code ENGLAND. This was the expected value. I was unable to find an issue with the code as I used the given encrypted code from the homework assignment. I also took a look at the trigram.java which was a successful implementation of breaking down the letters into trigrams and finding matches. Overall great job!
