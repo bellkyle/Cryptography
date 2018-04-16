@@ -80,17 +80,9 @@ public class Lenstra {
 				}
 			}
 			
-			BigInteger lamda = (((x.pow(2).multiply(BigInteger.valueOf(3))).add(A)).multiply((y.multiply(BigInteger.valueOf(2))).modInverse(p))).mod(p);
-			qx = (lamda.pow(2)).mod(p);
-			qx = (qx.subtract(x)).mod(p);
-			qx = (qx.subtract(x)).mod(p);
-			qx = qx.mod(p);
-			qy = x.subtract(qx);
-			qy = qy.multiply(lamda);
-			qy = qy.subtract(y);
-			qy = qy.mod(p);
-			x = qx;
-			y = qy;
+			addition(x, y, x, y, A);
+			x = addX;
+			y = addY;
 			
 			j = j.divide(BigInteger.valueOf(2));
 		}
