@@ -11,31 +11,26 @@ public class Lenstra {
 	public static void main(String[] args) {
 		BigInteger A;
 		BigInteger B;
+		BigInteger n;
 		p = BigInteger.valueOf(187);
-		/*Scanner input = new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
 		System.out.println("E:Y^2 = X^3 + AX + B");
 		System.out.println("Enter the A value of the elliptic curve equation");
 		A = input.nextBigInteger();
 		System.out.println("Enter the B value of the elliptic curve equation");
 		B = input.nextBigInteger();
-		System.out.println("Enter the prime value");
+		System.out.println("Enter the N");
 		p = input.nextBigInteger();
 		BigInteger x1;
 		BigInteger y1;
-		BigInteger n;
-		BigInteger y2;
 		System.out.println("Enter the x value of the first point");
 		x1 = input.nextBigInteger();
 		System.out.println("Enter the y value of the first point");
 		y1 = input.nextBigInteger();
-		System.out.println("Enter the n value");
-		n = input.nextBigInteger();
 		
-		input.close();*/
+		input.close();
 		//multiplication(x1,y1,n,A);
 		//System.out.println(multX + " " + multY);
-		if(addition(BigInteger.valueOf(43),BigInteger.valueOf(126),BigInteger.valueOf(54),BigInteger.valueOf(105),BigInteger.valueOf(3)))
-			System.out.println(addX + " " + addY);
 	}
 	
 	public static boolean addition(BigInteger x1, BigInteger y1, BigInteger x2, BigInteger y2, BigInteger A) {
@@ -60,10 +55,10 @@ public class Lenstra {
 	}
 	
 	
-	public static void multiplication(BigInteger x, BigInteger y, BigInteger n, BigInteger A) {
+	public static void multiplication(BigInteger x, BigInteger y, BigInteger j, BigInteger A) {
 		BigInteger rx = BigInteger.ZERO;
 		BigInteger ry = BigInteger.ZERO;
-		BigInteger on = n;
+		BigInteger oj = j;
 		BigInteger qx = x;
 		BigInteger qy = y;
 		if(n.equals(BigInteger.ONE))
@@ -73,8 +68,8 @@ public class Lenstra {
 			return;
 		}
 		while(n.compareTo(BigInteger.ZERO) == 1) {
-			if((n.mod(BigInteger.valueOf(2))).equals(BigInteger.ONE)) {
-				if(n.equals(on)) {
+			if((j.mod(BigInteger.valueOf(2))).equals(BigInteger.ONE)) {
+				if(j.equals(oj)) {
 					rx = x;
 					ry = y;
 				}
@@ -97,7 +92,7 @@ public class Lenstra {
 			x = qx;
 			y = qy;
 			
-			n = n.divide(BigInteger.valueOf(2));
+			j = j.divide(BigInteger.valueOf(2));
 		}
 		multX = rx;
 		multY = ry;
