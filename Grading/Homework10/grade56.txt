@@ -1,0 +1,4 @@
+5.6 Grade
+a) table is correct, solved using java
+b) table is correct solved using java. Our answers match.
+c) table is correct, solved using java. Our points match
